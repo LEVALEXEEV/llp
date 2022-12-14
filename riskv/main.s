@@ -1,7 +1,14 @@
-#main
+#main.s
 .text
 __start:
 .globl __start
+  call main
+finish:
+ mv a1, a0 # a1 = a0
+ li a0, 17 # a0 = 17
+ ecall # выход с кодом завершения
+.text 
+main:
  la a0, array # } a0 = <адрес 0-го элемента массива>
  lw a1, array_length # a1 = <длина массива>
  addi sp, sp, -16 # выделение памяти в стеке
@@ -10,7 +17,7 @@ __start:
  lw ra, 12(sp) # восстановление ra
  addi sp, sp, 16 # освобождение памяти в стеке
  li a0, 0 # a0 = 0
- ret # return 0;
+ ret # return 0
 .rodata
 array_length:
 .word 11
